@@ -16,8 +16,8 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad: function(){
-        this.speedX = this.minSpeed + Math.random() * (this.maxSpeed - this.minSpeed);
-        this.speedY = this.minSpeed / 2 + Math.random() * (this.maxSpeed - this.minSpeed);
+        this.speedX = this.minSpeed*2 + Math.random() * (this.maxSpeed - this.minSpeed);
+        this.speedY = this.minSpeed/2 + Math.random() * (this.maxSpeed - this.minSpeed);
     },
 
     start () {
@@ -27,7 +27,7 @@ cc.Class({
     update: function(dt){
         this.node.x -= dt * this.speedX;
         this.node.y -= dt * this.speedY;
-        if(this.node.x < -547 || this.node.y < -162){
+        if(this.node.x < -600 || this.node.y < -162){
             this.game.onStoneKilled(this.node);
         }
     },
