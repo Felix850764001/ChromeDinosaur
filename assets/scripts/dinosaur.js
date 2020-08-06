@@ -19,7 +19,7 @@ cc.Class({
         // 下落
         var jumpDown = cc.moveBy(this.jumpDuration, cc.v2(0, -this.jumpHeight)).easing(cc.easeCubicActionIn());
         // 不断重复
-        return cc.repeatForever(cc.sequence(jumpUp, jumpDown));
+        return cc.sequence(jumpUp, jumpDown);
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -39,10 +39,14 @@ cc.Class({
     onKeyDown(event){
         switch(event.keyCode){
             case cc.macro.KEY.w:
-                var jumpUp = cc.jumpBy(this.jumpDuration, cc.v2(this.node.x, 0), this.jumpHeight, 1);
-                this.node.runAction(jumpUp);
+                this.jumpAction = this.setJumpAction();  //赋值setJumpAction方法
+                this.node.runAction(this.jumpAction);
                 break;
         }
+    },
+
+    onKeyUp(event){
+        
     },
 
     start () {
