@@ -13,9 +13,13 @@ cc.Class({
         jumpHeight: 0,
     },
 
-    setJumpAction: function(){
-        var jumpUp = cc.jumpBy(this.jumpDuration, cc.v2(this.node.x, 0), this.jumpHeight, 1);
-        return jumpUp;
+    setJumpAction: function(){       //让主角跳起来
+        //  向上跳
+        var jumpUp = cc.moveBy(this.jumpDuration, cc.v2(0, this.jumpHeight)).easing(cc.easeCubicActionOut());
+        // 下落
+        var jumpDown = cc.moveBy(this.jumpDuration, cc.v2(0, -this.jumpHeight)).easing(cc.easeCubicActionIn());
+        // 不断重复
+        return cc.repeatForever(cc.sequence(jumpUp, jumpDown));
     },
 
     // LIFE-CYCLE CALLBACKS:
