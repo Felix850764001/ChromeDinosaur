@@ -40,7 +40,6 @@ cc.Class({
         switch(event.keyCode){
             case cc.macro.KEY.w:
                 if(this.node.y < -162){       //限制无限跳
-                    console.log("进入循环");
                     this.jumpAction = this.setJumpAction();  //赋值setJumpAction方法
                     this.node.runAction(this.jumpAction);
                 }

@@ -177,7 +177,7 @@
       "array": [
         0,
         0,
-        433.01270189221935,
+        252.00939420608205,
         0,
         0,
         0,
@@ -354,7 +354,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "action1",
+    "_name": "dinosaur",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -395,7 +395,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -467.8,
+        -457.777,
         -162.94,
         0,
         0,
@@ -535,11 +535,16 @@
       "__id__": 2
     },
     "_enabled": true,
+    "dinosaur": {
+      "__id__": 8
+    },
     "stonePrefab": {
       "__uuid__": "b9e7d2e5-aaad-4a96-b96d-5297e8c1742e"
     },
-    "stoneMaxDuration": 2,
-    "stoneMinDuration": 5,
+    "stoneMaxDuration": 5,
+    "stoneMinDuration": 3,
+    "stoneMinX": 260,
+    "stoneMaxX": 560,
     "_id": "56tL47U2ZNwavfVNGe1nXg"
   }
 ]
