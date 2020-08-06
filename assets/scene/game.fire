@@ -177,7 +177,7 @@
       "array": [
         0,
         0,
-        252.00939420608205,
+        433.01270189221935,
         0,
         0,
         0,
@@ -541,9 +541,14 @@
     "stonePrefab": {
       "__uuid__": "b9e7d2e5-aaad-4a96-b96d-5297e8c1742e"
     },
+    "plantPrefab": {
+      "__uuid__": "7f4b7756-c2ee-4ad0-bbe9-c12412fc66a4"
+    },
     "stoneMaxDuration": 5,
     "stoneMinDuration": 3,
-    "stoneMinX": 260,
+    "plantMaxDuration": 5,
+    "plantMinDuration": 3,
+    "stoneMinX": 280,
     "stoneMaxX": 560,
     "_id": "56tL47U2ZNwavfVNGe1nXg"
   }

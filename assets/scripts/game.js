@@ -17,8 +17,17 @@ cc.Class({
             default: null,
             type: cc.Prefab,
         },
+        plantPrefab: {
+            default: null,
+            type: cc.Prefab,
+        },
+        //陨石降落时间阈值
         stoneMaxDuration: 0,
         stoneMinDuration: 0,
+        //植物出场时间阈值
+        plantMaxDuration: 0,
+        plantMinDuration: 0,
+        //陨石X坐标阈值
         stoneMinX: 0,
         stoneMaxX: 0,
     },
@@ -26,7 +35,6 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad: function(){
-        //console.log("进入onload");
         this.stoneTime = 0;
         //初始化陨石对象池
         this.stonePool = new cc.NodePool;
@@ -36,11 +44,20 @@ cc.Class({
             this.stonePool.put(newStone);
         }
         this.spawnNewStone();
+
+        this.plantTime = 0;
+        //初始化normal植物对象池
+        this.plantPool = new cc.NodePool;
+        let plantCount = 3;
+        for(let i=0; i<plantCount; i++){
+            let newPlant = cc.instantiate(this.plantPrefab);
+            this.plantPool.put(newPlant);
+        }
+        this.spawnNewPlant();
     },
 
     //陨石生成函数
     spawnNewStone: function(){
-        console.log("生成陨石");
         if(this.stonePool.size() > 0){
             var newStone = this.stonePool.get();
         } else{
@@ -62,8 +79,23 @@ cc.Class({
     //生成陨石位置
     newStonePosition: function(){
         let randX = this.stoneMinX + Math.random() * (this.stoneMaxX - this.stoneMinX);
-        let randY = 290;
+        let randY = 280;
         return cc.v2(randX, randY);
+    },
+
+    //normal plant生成函数
+    spawnNewPlant: function(){
+        if(this.plantPool.size() > 0){
+            var newPlant = this.plantPool.get();
+        } else{
+            var newPlant = cc.instantiate(this.plantPrefab);
+        }
+        newPlant.getComponent('plant').game = this;
+        this.plantDuration = this.plantMinDuration + Math.random() * (this.plantMaxDuration - this.plantMinDuration);
+    },
+    //normal plant销毁
+    onPlantKilled: function(newPlant){
+        this.plantPool.put(newPlant);
     },
 
     start () {
@@ -74,8 +106,12 @@ cc.Class({
         //生成陨石
         this.stoneTime += dt;
         if(this.stoneTime > this.stoneDuration){
-            console.log("生成陨石时间");
             this.spawnNewStone();
+        }
+        //生成植物
+        this.plantTime += dt;
+        if(this.plantTime > this.plantDuration){
+            this.spawnNewPlant();
         }
     },
 });

@@ -9,26 +9,21 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        speedX: 0,
-        speedY: 0,
+        speed: 0,
     },
 
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad: function(){
-        // this.speedX = this.minSpeed*2 + Math.random() * (this.maxSpeed - this.minSpeed);
-        // this.speedY = this.minSpeed + Math.random() * (this.maxSpeed - this.minSpeed);
-    },
+    // onLoad () {},
 
     start () {
 
     },
 
     update: function(dt){
-        this.node.x -= dt * this.speedX;
-        this.node.y -= dt * this.speedY;
-        if(this.node.x < -600 || this.node.y < -162){
-            this.game.onStoneKilled(this.node);
+        this.node.x -= this.speed * dt;
+        if(this.node.x < -600){
+            this.game.onPlantKilled(this.node);
         }
     },
 });
