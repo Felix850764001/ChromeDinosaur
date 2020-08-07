@@ -18,7 +18,6 @@ cc.Class({
         var jumpUp = cc.moveBy(this.jumpDuration, cc.v2(0, this.jumpHeight)).easing(cc.easeCubicActionOut());
         // 下落
         var jumpDown = cc.moveBy(this.jumpDuration, cc.v2(0, -this.jumpHeight)).easing(cc.easeCubicActionIn());
-        // 不断重复
         return cc.sequence(jumpUp, jumpDown);
     },
 
@@ -39,11 +38,17 @@ cc.Class({
     onKeyDown(event){
         switch(event.keyCode){
             case cc.macro.KEY.w:
-                if(this.node.y < -162){       //限制无限跳
+                if(this.node.y <= -162){       //限制无限跳
                     this.jumpAction = this.setJumpAction();  //赋值setJumpAction方法
                     this.node.runAction(this.jumpAction);
                 }
                 break;
+            case cc.macro.KEY.s:
+                if(this.node.y > -163){
+                    this.node.stopAction(this.jumpAction);
+                    var moveDown = cc.moveTo(0.1, this.node.x,-163);
+                    this.node.runAction(moveDown);
+                }
         }
     },
 
@@ -52,5 +57,10 @@ cc.Class({
 
     },
 
-    // update (dt) {},
+    // update: function(dt){
+    //     if(this.node.y < -163){
+    //         this.node.stopAction(moveDown);
+    //         this.node.y = -163;
+    //     }
+    // },
 });

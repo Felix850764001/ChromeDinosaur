@@ -91,7 +91,7 @@ cc.Class({
             var newPlant = cc.instantiate(this.plantPrefab);
         }
         this.node.addChild(newPlant);
-        newPlant.setPosition(650,-157.5);
+        newPlant.setPosition(650,-156.5);
         newPlant.getComponent('plant').game = this;
         this.plantTime = 0;
         this.plantDuration = this.plantMinDuration + Math.random() * (this.plantMaxDuration - this.plantMinDuration);
