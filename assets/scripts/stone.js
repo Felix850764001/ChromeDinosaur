@@ -15,10 +15,8 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad: function(){
-        // this.speedX = this.minSpeed*2 + Math.random() * (this.maxSpeed - this.minSpeed);
-        // this.speedY = this.minSpeed + Math.random() * (this.maxSpeed - this.minSpeed);
-    },
+    // onLoad: function(){
+    // },
 
     start () {
 

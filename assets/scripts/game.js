@@ -5,6 +5,7 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
+//设立一个基准难度系数 随时间增长 障碍物的速度均受基准难度系数控制 有阈值
 cc.Class({
     extends: cc.Component,
 
@@ -12,6 +13,10 @@ cc.Class({
         dinosaur: {
             default: null,
             type: cc.Node,
+        },
+        scoreLabel: {
+            default: null,
+            type: cc.Label,
         },
         stonePrefab: {
             default: null,
@@ -43,7 +48,7 @@ cc.Class({
             let newStone = cc.instantiate(this.stonePrefab);
             this.stonePool.put(newStone);
         }
-        this.spawnNewStone();
+        this.stoneDuration = Math.random();
 
         this.plantTime = 0;
         //初始化normal植物对象池
@@ -53,7 +58,9 @@ cc.Class({
             let newPlant = cc.instantiate(this.plantPrefab);
             this.plantPool.put(newPlant);
         }
-        this.spawnNewPlant();
+        this.plantDuration = Math.random();
+
+        this.score = 0;
     },
 
     //陨石生成函数
@@ -116,5 +123,7 @@ cc.Class({
         if(this.plantTime > this.plantDuration){
             this.spawnNewPlant();
         }
+        this.score += 10*dt;
+        this.scoreLabel.string = "score:" + Math.round(this.score / 1);
     },
 });
