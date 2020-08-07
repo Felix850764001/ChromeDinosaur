@@ -116,8 +116,8 @@
       "__id__": 1
     },
     "_enabled": true,
-    "speedX": 200,
-    "speedY": 300,
+    "speedX": 300,
+    "speedY": 200,
     "_id": ""
   },
   {
