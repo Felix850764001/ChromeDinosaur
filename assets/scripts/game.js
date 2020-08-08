@@ -5,7 +5,7 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
-//设立一个基准难度系数 随时间增长 障碍物的速度均受基准难度系数控制 有阈值
+//设立一个基准难度系数 随时间增长 障碍物的速度、动画播放速度、分数增长均受基准难度系数控制 有阈值
 cc.Class({
     extends: cc.Component,
 
@@ -59,8 +59,12 @@ cc.Class({
             this.plantPool.put(newPlant);
         }
         this.plantDuration = Math.random();
-
+        //初始化分数
         this.score = 0;
+        //控制动画播放速度
+        var anim = this.getComponent(cc.Animation);
+        var animState = anim.play('bk_roll');
+        animState.speed = 3;
     },
 
     //陨石生成函数

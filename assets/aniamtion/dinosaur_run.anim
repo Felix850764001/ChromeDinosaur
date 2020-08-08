@@ -5,7 +5,7 @@
   "_native": "",
   "_duration": 0.03333333333333333,
   "sample": 60,
-  "speed": 0.1,
+  "speed": 0.2,
   "wrapMode": 2,
   "curveData": {
     "comps": {
@@ -14,13 +14,13 @@
           {
             "frame": 0,
             "value": {
-              "__uuid__": "422fee60-2156-4d2f-a89d-856509c006dc"
+              "__uuid__": "34606433-86a5-495a-b233-21126e218205"
             }
           },
           {
             "frame": 0.016666666666666666,
             "value": {
-              "__uuid__": "e5a728c7-1e05-419d-bbf2-be8af2798e0e"
+              "__uuid__": "e39859ca-f489-4e70-a28a-7315d749a5b0"
             }
           }
         ]
