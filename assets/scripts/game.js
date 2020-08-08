@@ -6,6 +6,7 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 //设立一个基准难度系数 随时间增长 障碍物的速度、动画播放速度、分数增长均受基准难度系数控制 有阈值
+//碰撞、大小两种植物要加、陨石的出现时间、
 cc.Class({
     extends: cc.Component,
 
@@ -23,6 +24,10 @@ cc.Class({
             type: cc.Label,
         },
         stonePrefab: {
+            default: null,
+            type: cc.Prefab,
+        },
+        birdPrefab: {
             default: null,
             type: cc.Prefab,
         },
@@ -65,12 +70,19 @@ cc.Class({
             this.plantPool.put(newPlant);
         }
         this.plantDuration = Math.random();
+
+        this.birdTime = 0;
+        //初始化bird对象池
+        this.birdPool = new cc.NodePool;
+        let birdCount = 3;
+        for(let i=0; i<birdCount; i++){
+            let newBird = cc.instantiate(this.birdPrefab);
+            this.birdPool.put(newBird);
+        }
+        this.birdDuration = Math.random();
+
         //初始化分数
         this.score = 0;
-        //控制动画播放速度
-        // var anim = this.getComponent(cc.Animation);
-        // var animState = anim.play('bk_roll');
-        // animState.speed = 3;
 
         //初始化键盘输入监听    (type, callback, target)
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
@@ -146,20 +158,41 @@ cc.Class({
         this.plantPool.put(newPlant);
     },
 
+    //bird生成函数
+    spawnNewBird: function(){
+        if(this.birdPool.size() > 0){
+            var newBird = this.birdPool.get();
+        } else{
+            var newBird = cc.instantiate(this.birdPrefab);
+        }
+        newBird.setPosition(645, -145+Math.random()*(225));
+        newBird.getComponent('bird').game = this;
+        this.birdTime = 0;
+    },
+    //bird销毁
+    onBirdKilled: function(newBird){
+        this.birdPool.get(newBird);
+    },
+
     start () {
 
     },
 
     update: function(dt){
-        //生成陨石
+        //生成陨石,200分开始
         this.stoneTime += dt;
-        if(this.stoneTime > this.stoneDuration){
+        if(this.stoneTime > this.stoneDuration && this.score > 200){
             this.spawnNewStone();
         }
         //生成植物
         this.plantTime += dt;
         if(this.plantTime > this.plantDuration){
             this.spawnNewPlant();
+        }
+        //生成飞鸟，300分开始
+        this.birdTime += dt;
+        if(this.birdTime > this.birdDuration && this.score > 300){
+            this.spawnNewBird();
         }
         this.score += 10*dt;
         this.scoreLabel.string = "score:" + Math.round(this.score / 1);
