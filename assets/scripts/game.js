@@ -14,6 +14,10 @@ cc.Class({
             default: null,
             type: cc.Node,
         },
+        downRun: {
+            default: null,
+            type: cc.Node,
+        },
         scoreLabel: {
             default: null,
             type: cc.Label,
@@ -40,6 +44,8 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad: function(){
+        //初始化downRun动画不可见
+        this.downRun.active = false;
         this.stoneTime = 0;
         //初始化陨石对象池
         this.stonePool = new cc.NodePool;
@@ -62,9 +68,37 @@ cc.Class({
         //初始化分数
         this.score = 0;
         //控制动画播放速度
-        var anim = this.getComponent(cc.Animation);
-        var animState = anim.play('bk_roll');
-        animState.speed = 3;
+        // var anim = this.getComponent(cc.Animation);
+        // var animState = anim.play('bk_roll');
+        // animState.speed = 3;
+
+        //初始化键盘输入监听    (type, callback, target)
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+    },
+
+     //取消键盘输入监听
+     onDestroy(){
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+    },
+
+    onKeyDown(event){
+        switch(event.keyCode){
+            case cc.macro.KEY.s:
+                if(this.dinosaur.y <= -162){
+                    this.dinosaur.active = false;
+                    this.downRun.active = true;
+                }
+        }
+    },
+
+    onKeyUp(event){
+        switch(event.keyCode){
+            case cc.macro.KEY.s:
+                this.dinosaur.active = true;
+                this.downRun.active = false;
+        }
     },
 
     //陨石生成函数
