@@ -22,7 +22,7 @@ cc.Class({
 
     update: function(dt){
         this.node.x -= dt*this.speed;
-        if(this.node.x < -680){
+        if(this.node.x < -600){
             this.game.onBirdKilled(this.node);
         }
     },

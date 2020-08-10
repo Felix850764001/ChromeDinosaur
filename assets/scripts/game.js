@@ -44,6 +44,9 @@ cc.Class({
         //陨石X坐标阈值
         stoneMinX: 0,
         stoneMaxX: 0,
+        //bird出场时间阈值
+        birdMaxTime: 0,
+        birdMinTime: 0,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -165,9 +168,11 @@ cc.Class({
         } else{
             var newBird = cc.instantiate(this.birdPrefab);
         }
-        newBird.setPosition(645, -145+Math.random()*(225));
+        this.node.addChild(newBird);
+        newBird.setPosition(650, -90+Math.random()*(180));
         newBird.getComponent('bird').game = this;
         this.birdTime = 0;
+        this.birdDuration = this.birdMinTime + Math.random() * (this.birdMaxTime - this.birdMinTime);
     },
     //bird销毁
     onBirdKilled: function(newBird){
@@ -179,9 +184,9 @@ cc.Class({
     },
 
     update: function(dt){
-        //生成陨石,200分开始
+        //生成陨石,300分开始
         this.stoneTime += dt;
-        if(this.stoneTime > this.stoneDuration && this.score > 200){
+        if(this.stoneTime > this.stoneDuration && this.score > 300){
             this.spawnNewStone();
         }
         //生成植物
@@ -189,9 +194,9 @@ cc.Class({
         if(this.plantTime > this.plantDuration){
             this.spawnNewPlant();
         }
-        //生成飞鸟，300分开始
+        //生成飞鸟,200分开始
         this.birdTime += dt;
-        if(this.birdTime > this.birdDuration && this.score > 300){
+        if(this.birdTime > this.birdDuration && this.score > 200){
             this.spawnNewBird();
         }
         this.score += 10*dt;
