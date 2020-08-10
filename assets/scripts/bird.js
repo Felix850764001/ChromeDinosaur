@@ -14,7 +14,11 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
+    onLoad: function(){
+        //初始化碰撞
+        cc.director.getCollisionManager().enabled = true;
+        cc.director.getCollisionManager().enabledDebugDraw = false;  //是否显示碰撞边框
+    },
 
     start () {
 

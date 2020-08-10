@@ -6,7 +6,7 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 //设立一个基准难度系数 随时间增长 障碍物的速度、动画播放速度、分数增长均受基准难度系数控制 有阈值
-//碰撞、大小两种植物要加、陨石的出现时间、
+//碰撞、小植物、碰撞动画、恐龙死亡所有动画暂停
 cc.Class({
     extends: cc.Component,
 

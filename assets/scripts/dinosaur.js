@@ -5,12 +5,17 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
+window.py = 0;
 cc.Class({
     extends: cc.Component,
 
     properties: {
         jumpDuration: 0,
         jumpHeight: 0,
+        dead: {
+            default: null,
+            type: cc.Node,
+        },
     },
 
     setJumpAction: function(){       //让主角跳起来
@@ -27,6 +32,14 @@ cc.Class({
         //初始化键盘输入监听    (type, callback, target)
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+        //初始化碰撞
+        cc.director.getCollisionManager().enabled = true;
+        cc.director.getCollisionManager().enabledDebugDraw = false;  //是否显示碰撞边框
+    },
+    onCollisionEnter: function (other, self){
+        this.node.opacity = 0;
+        this.dead.opacity = 255;
+        cc.director.pause();
     },
 
     //取消键盘输入监听
@@ -57,10 +70,7 @@ cc.Class({
 
     },
 
-    // update: function(dt){
-    //     if(this.node.y < -163){
-    //         this.node.stopAction(moveDown);
-    //         this.node.y = -163;
-    //     }
-    // },
+    update: function(dt){
+        py = this.node.y;
+    },
 });

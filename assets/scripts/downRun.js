@@ -9,27 +9,23 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
+        downDead: {
+            default: null,
+            type: cc.Node,
+        },
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad: function(){
-        //this.node.active = false;
+        //初始化碰撞
+        cc.director.getCollisionManager().enabled = true;
+        cc.director.getCollisionManager().enabledDebugDraw = false;  //是否显示碰撞边框
+    },
+    onCollisionEnter: function (other, self){
+        this.node.opacity = 0;
+        this.downDead.opacity = 255;
+        cc.director.pause();
     },
 
     start () {
