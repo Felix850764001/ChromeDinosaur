@@ -183,7 +183,7 @@
       "array": [
         0,
         0,
-        271.92770816529145,
+        433.01270189221935,
         0,
         0,
         0,
@@ -782,12 +782,19 @@
     "plantPrefab": {
       "__uuid__": "7f4b7756-c2ee-4ad0-bbe9-c12412fc66a4"
     },
+    "plantBPrefab": {
+      "__uuid__": "240e7bd1-cf76-4b83-9a39-31e0009c007f"
+    },
     "stoneMaxDuration": 10,
     "stoneMinDuration": 8,
     "plantMaxDuration": 5,
     "plantMinDuration": 3,
+    "plantBMaxDuration": 0,
+    "plantBMinDuration": 0,
     "stoneMinX": 280,
     "stoneMaxX": 560,
+    "birdMaxTime": 8,
+    "birdMinTime": 5,
     "_id": "56tL47U2ZNwavfVNGe1nXg"
   }
 ]

@@ -35,12 +35,19 @@ cc.Class({
             default: null,
             type: cc.Prefab,
         },
+        plantBPrefab: {
+            default: null,
+            type: cc.Prefab,
+        },
         //陨石降落时间阈值
         stoneMaxDuration: 0,
         stoneMinDuration: 0,
         //植物出场时间阈值
         plantMaxDuration: 0,
         plantMinDuration: 0,
+        //植物2出场时间阈值
+        plantBMaxDuration: 0,
+        plantBMinDuration: 0,
         //陨石X坐标阈值
         stoneMinX: 0,
         stoneMaxX: 0,
@@ -65,7 +72,7 @@ cc.Class({
         this.stoneDuration = Math.random();
 
         this.plantTime = 0;
-        //初始化normal植物对象池
+        //初始化normal plant对象池
         this.plantPool = new cc.NodePool;
         let plantCount = 3;
         for(let i=0; i<plantCount; i++){
@@ -73,6 +80,16 @@ cc.Class({
             this.plantPool.put(newPlant);
         }
         this.plantDuration = Math.random();
+
+        this.plantBTime = 0;
+        //初始化plantB对象池
+        this.plantBPool = new cc.NodePool;
+        let plantBCount = 3;
+        for(let i=0; i<plantBCount; i++){
+            let newPlantB = cc.instantiate(this.plantBPrefab);
+            this.plantBPool.put(newPlantB);
+        }
+        this.plantBDuration = Math.random();
 
         this.birdTime = 0;
         //初始化bird对象池
@@ -160,6 +177,24 @@ cc.Class({
     onPlantKilled: function(newPlant){
         this.plantPool.put(newPlant);
     },
+    
+    //plantB生成函数
+    spawnNewPlantB: function(){
+        if(this.plantBPool.size() > 0){
+            var newPlantB = this.plantBPool.get();
+        } else{
+            var newPlantB = cc.instantiate(this.plantBPrefab);
+        }
+        this.node.addChild(newPlantB);
+        newPlantB.setPosition(650,-167);
+        newPlantB.getComponent('plantB').game = this;
+        this.plantBTime = 0;
+        this.plantBDuration = this.plantBMinDuration + Math.random() * (this.plantBMaxDuration - this.plantBMinDuration);
+    },
+    //plantB销毁
+    onPlantBKilled: function(newPlant){
+        this.plantBPool.put(newPlant);
+    },
 
     //bird生成函数
     spawnNewBird: function(){
@@ -189,10 +224,15 @@ cc.Class({
         if(this.stoneTime > this.stoneDuration && this.score > 300){
             this.spawnNewStone();
         }
-        //生成植物
+        //生成normal plant
         this.plantTime += dt;
         if(this.plantTime > this.plantDuration){
             this.spawnNewPlant();
+        }
+        //生成plantB
+        this.plantBTime += dt;
+        if(this.plantBTime > this.plantBDuration){
+            this.spawnNewPlantB();
         }
         //生成飞鸟,200分开始
         this.birdTime += dt;
