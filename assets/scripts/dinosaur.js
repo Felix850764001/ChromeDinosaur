@@ -39,7 +39,11 @@ cc.Class({
     onCollisionEnter: function (other, self){
         this.node.opacity = 0;
         this.dead.opacity = 255;
+        //暂停游戏
         cc.director.pause();
+        //初始化键盘输入监听    (type, callback, target)
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
     },
 
     //取消键盘输入监听

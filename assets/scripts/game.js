@@ -6,7 +6,7 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 //设立一个基准难度系数 随时间增长 障碍物的速度、动画播放速度、分数增长均受基准难度系数控制 有阈值
-//碰撞、小植物、碰撞动画、恐龙死亡所有动画暂停
+//碰撞动画、downRun时发生碰撞，s仍可用、plantB碰撞后会消失、碰撞飞鸟后模型落地、游戏结束界面
 cc.Class({
     extends: cc.Component,
 
@@ -204,7 +204,7 @@ cc.Class({
             var newBird = cc.instantiate(this.birdPrefab);
         }
         this.node.addChild(newBird);
-        newBird.setPosition(650, -90+Math.random()*(180));
+        newBird.setPosition(650, -167 + Math.random()*(200));
         newBird.getComponent('bird').game = this;
         this.birdTime = 0;
         this.birdDuration = this.birdMinTime + Math.random() * (this.birdMaxTime - this.birdMinTime);
@@ -236,7 +236,7 @@ cc.Class({
         }
         //生成飞鸟,200分开始
         this.birdTime += dt;
-        if(this.birdTime > this.birdDuration && this.score > 200){
+        if(this.birdTime > this.birdDuration && this.score > 100){
             this.spawnNewBird();
         }
         this.score += 10*dt;
