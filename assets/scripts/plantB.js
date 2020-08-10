@@ -19,6 +19,9 @@ cc.Class({
         cc.director.getCollisionManager().enabled = true;
         cc.director.getCollisionManager().enabledDebugDraw = false;  //是否显示碰撞边框
     },
+    onCollisionEnter: function (stone, self){
+        this.game.onPlantBKilled(this.node);
+    },
 
     start () {
 

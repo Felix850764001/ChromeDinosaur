@@ -51,15 +51,15 @@ cc.Class({
     onKeyDown(event){
         switch(event.keyCode){
             case cc.macro.KEY.w:
-                if(this.node.y <= -162){       //限制无限跳
+                if(this.node.y <= -166){       //限制无限跳
                     this.jumpAction = this.setJumpAction();  //赋值setJumpAction方法
                     this.node.runAction(this.jumpAction);
                 }
                 break;
             case cc.macro.KEY.s:
-                if(this.node.y > -163){
+                if(this.node.y > -167){
                     this.node.stopAction(this.jumpAction);
-                    var moveDown = cc.moveTo(0.1, this.node.x,-163);
+                    var moveDown = cc.moveTo(0.1, this.node.x,-167);
                     this.node.runAction(moveDown);
                 }
         }

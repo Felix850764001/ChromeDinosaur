@@ -28,7 +28,7 @@ cc.Class({
     update: function(dt){
         this.node.x -= dt * this.speedX;
         this.node.y -= dt * this.speedY;
-        if(this.node.x < -600 || this.node.y < -162){
+        if(this.node.x < -600 || this.node.y < -167){
             this.game.onStoneKilled(this.node);
         }
     },

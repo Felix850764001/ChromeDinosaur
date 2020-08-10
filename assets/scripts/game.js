@@ -45,7 +45,7 @@ cc.Class({
         //植物出场时间阈值
         plantMaxDuration: 0,
         plantMinDuration: 0,
-        //植物2出场时间阈值
+        //植物B出场时间阈值
         plantBMaxDuration: 0,
         plantBMinDuration: 0,
         //陨石X坐标阈值
@@ -118,7 +118,7 @@ cc.Class({
     onKeyDown(event){
         switch(event.keyCode){
             case cc.macro.KEY.s:
-                if(this.dinosaur.y <= -162){
+                if(this.dinosaur.y < -166){
                     this.dinosaur.active = false;
                     this.downRun.active = true;
                 }
@@ -221,7 +221,7 @@ cc.Class({
     update: function(dt){
         //生成陨石,300分开始
         this.stoneTime += dt;
-        if(this.stoneTime > this.stoneDuration && this.score > 300){
+        if(this.stoneTime > this.stoneDuration && this.score > 50){
             this.spawnNewStone();
         }
         //生成normal plant
