@@ -19,12 +19,11 @@ cc.Class({
         cc.director.getCollisionManager().enabled = true;
         cc.director.getCollisionManager().enabledDebugDraw = false;  //是否显示碰撞边框
     },
-    onCollisionEnter: function (stone, self){
-        console.log("plant和stone碰撞");
-        this.game.onPlantKilled(this.node);
-    },
-    onCollisionEnter: function (plant, self){
-        if(plant.tag == 2){
+    onCollisionEnter: function (other, self){
+        if(other.tag == 4){  //和stone碰撞
+            this.game.onPlantKilled(this.node);
+        } else if(other.tag == 2){   //和plantB碰撞
+            console.log('plant碰撞plantB');
             this.game.onPlantKilled(this.node);
         }
     },

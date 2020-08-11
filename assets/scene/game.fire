@@ -876,7 +876,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -452,
+        -453,
         -167,
         0,
         0,
@@ -966,7 +966,7 @@
     "_id": "dfYJNXY4hCA6cqdCbXSPYe"
   },
   {
-    "__type__": "cc.BoxCollider",
+    "__type__": "cc.PolygonCollider",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -979,12 +979,39 @@
       "x": 0,
       "y": 0
     },
-    "_size": {
-      "__type__": "cc.Size",
-      "width": 91,
-      "height": 86
-    },
-    "_id": "efOzgguTxCI5hRirOj9g6J"
+    "points": [
+      {
+        "__type__": "cc.Vec2",
+        "x": -33,
+        "y": -7
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": -21,
+        "y": -38
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": 25,
+        "y": -21
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": 47,
+        "y": 12
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": 50,
+        "y": 44
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": -19,
+        "y": 19
+      }
+    ],
+    "_id": "bf8PSsgNlEZ41Tfdtcnx0m"
   },
   {
     "__type__": "cc.Canvas",

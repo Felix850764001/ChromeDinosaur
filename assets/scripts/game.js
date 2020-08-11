@@ -5,8 +5,8 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
-//设立一个基准难度系数 随时间增长 障碍物的速度、动画播放速度、分数增长均受基准难度系数控制 有阈值
-//碰撞动画、downRun时发生碰撞s仍可用、空中碰撞后模型落地、游戏结束界面、陨石爆炸动画、陨石无法摧毁植物、飞鸟碰撞后会消失
+//设立一个基准难度系数 随时间增长 障碍物的速度、动画播放速度、分数增长均受基准难度系数控制 有阈值、游戏结束界面、陨石爆炸动画
+//downRun时发生碰撞s仍可用、正常跳跃落地后按键均无效（偶现）
 cc.Class({
     extends: cc.Component,
 

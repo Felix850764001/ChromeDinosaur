@@ -17,7 +17,7 @@ cc.Class({
         },
     },
 
-    setJumpAction: function(){       //让主角跳起来
+    setJumpAction: function(){
         //  向上跳
         var jumpUp = cc.moveBy(this.jumpDuration, cc.v2(0, this.jumpHeight)).easing(cc.easeCubicActionOut());
         // 下落
@@ -46,10 +46,8 @@ cc.Class({
         switch(event.keyCode){
             case cc.macro.KEY.w:
                 if(this.node.y == -167){       //限制无限跳
-                    console.log(this.node.y);
                     this.jumpAction = this.setJumpAction();  //赋值setJumpAction方法
                     this.node.runAction(this.jumpAction);
-                    console.log(this.node.y);
                 }
                 break;
             case cc.macro.KEY.s:
