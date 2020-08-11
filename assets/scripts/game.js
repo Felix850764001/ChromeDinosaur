@@ -6,7 +6,7 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 //设立一个基准难度系数 随时间增长 障碍物的速度、动画播放速度、分数增长均受基准难度系数控制 有阈值、游戏结束界面、陨石爆炸动画
-//downRun时发生碰撞s仍可用、正常跳跃落地后按键均无效（偶现）
+//downRun时发生碰撞s仍可用、正常跳跃落地后按键均无效（偶现）代码已改，待验证    跳跃中按s会坠入深渊
 cc.Class({
     extends: cc.Component,
 
@@ -16,6 +16,10 @@ cc.Class({
             type: cc.Node,
         },
         downRun: {
+            default: null,
+            type: cc.Node,
+        },
+        background: {
             default: null,
             type: cc.Node,
         },
@@ -59,6 +63,8 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad: function(){
+        //设置动画播放速度
+        //var anim = this.background.getComponent(cc.)
         //初始化downRun动画不可见
         this.downRun.active = false;
         this.stoneTime = 0;

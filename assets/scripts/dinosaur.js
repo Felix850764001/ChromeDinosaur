@@ -43,9 +43,12 @@ cc.Class({
     },
 
     onKeyDown(event){
+        //console.log("keydown");     经测验可以进入keyDown
         switch(event.keyCode){
             case cc.macro.KEY.w:
-                if(this.node.y == -167){       //限制无限跳
+                //console.log("w");    经验证可以判断出按下了W
+                if(this.node.y < -166){       //限制无限跳       //无法进入判断
+                    //console.log("jump");
                     this.jumpAction = this.setJumpAction();  //赋值setJumpAction方法
                     this.node.runAction(this.jumpAction);
                 }

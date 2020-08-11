@@ -23,7 +23,6 @@ cc.Class({
         if(other.tag == 4){  //和stone碰撞
             this.game.onPlantBKilled(this.node);
         } else if(other.tag == 1){   //和plant碰撞
-            console.log('plantB碰撞plant');
             this.game.onPlantBKilled(this.node);
         }
     },
