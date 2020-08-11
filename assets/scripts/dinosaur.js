@@ -15,6 +15,10 @@ cc.Class({
             default: null,
             type: cc.Node,
         },
+        downRun: {
+            default: null,
+            type: cc.Node,
+        },
     },
 
     setJumpAction: function(){
@@ -38,23 +42,22 @@ cc.Class({
     onCollisionEnter: function (other, self){
         this.node.opacity = 0;
         this.dead.opacity = 255;
+        this.downRun.opacity = 0;
         //暂停游戏
         cc.director.pause();
     },
 
     onKeyDown(event){
-        //console.log("keydown");     经测验可以进入keyDown
         switch(event.keyCode){
             case cc.macro.KEY.w:
-                //console.log("w");    经验证可以判断出按下了W
-                if(this.node.y < -166){       //限制无限跳       //无法进入判断
+                if(this.node.y < -166){       //限制无限跳
                     //console.log("jump");
                     this.jumpAction = this.setJumpAction();  //赋值setJumpAction方法
                     this.node.runAction(this.jumpAction);
                 }
                 break;
             case cc.macro.KEY.s:
-                if(this.node.y > -167){
+                if(this.node.y > -166){
                     this.node.stopAction(this.jumpAction);
                     var moveDown = cc.moveTo(0.1, this.node.x,-167);
                     this.node.runAction(moveDown);

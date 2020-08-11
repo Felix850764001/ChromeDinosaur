@@ -13,6 +13,10 @@ cc.Class({
             default: null,
             type: cc.Node,
         },
+        dinosaur: {
+            default: null,
+            type: cc.Node,
+        },
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -25,6 +29,7 @@ cc.Class({
     onCollisionEnter: function (other, self){
         this.node.opacity = 0;
         this.downDead.opacity = 255;
+        this.dinosaur.opacity = 0;
         cc.director.pause();
     },
 
