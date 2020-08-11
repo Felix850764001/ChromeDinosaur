@@ -54,8 +54,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        39,
-        -40,
+        39.224,
+        -39.105,
         0,
         0,
         0,
@@ -131,11 +131,11 @@
       "__id__": 1
     },
     "_enabled": true,
-    "tag": 0,
+    "tag": 4,
     "_offset": {
       "__type__": "cc.Vec2",
       "x": -16,
-      "y": -19
+      "y": -19.9
     },
     "_radius": 12,
     "_id": ""

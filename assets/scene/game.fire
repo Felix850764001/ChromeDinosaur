@@ -521,8 +521,8 @@
     "_skewX": 0,
     "_skewY": 0,
     "_is3DNode": false,
-    "_groupIndex": 0,
-    "groupIndex": 0,
+    "_groupIndex": 1,
+    "groupIndex": 1,
     "_id": "ee7aIefZNMLZoWDqI5um4Z"
   },
   {
@@ -628,8 +628,8 @@
     "_skewX": 0,
     "_skewY": 0,
     "_is3DNode": false,
-    "_groupIndex": 0,
-    "groupIndex": 0,
+    "_groupIndex": 1,
+    "groupIndex": 1,
     "_id": "1c2lN3RtlCf6iw8JoFqK4L"
   },
   {
@@ -973,7 +973,7 @@
       "__id__": 21
     },
     "_enabled": true,
-    "tag": 0,
+    "tag": 3,
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -1059,16 +1059,16 @@
     "plantBPrefab": {
       "__uuid__": "240e7bd1-cf76-4b83-9a39-31e0009c007f"
     },
-    "stoneMaxDuration": 10,
-    "stoneMinDuration": 8,
+    "stoneMaxDuration": 2,
+    "stoneMinDuration": 1,
     "plantMaxDuration": 5,
     "plantMinDuration": 3,
     "plantBMaxDuration": 8,
     "plantBMinDuration": 6,
     "stoneMinX": 280,
     "stoneMaxX": 560,
-    "birdMaxTime": 8,
-    "birdMinTime": 5,
+    "birdMaxTime": 3,
+    "birdMinTime": 2,
     "_id": "56tL47U2ZNwavfVNGe1nXg"
   }
 ]

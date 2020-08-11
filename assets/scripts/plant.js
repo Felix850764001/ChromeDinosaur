@@ -20,7 +20,13 @@ cc.Class({
         cc.director.getCollisionManager().enabledDebugDraw = false;  //是否显示碰撞边框
     },
     onCollisionEnter: function (stone, self){
+        console.log("plant和stone碰撞");
         this.game.onPlantKilled(this.node);
+    },
+    onCollisionEnter: function (plant, self){
+        if(plant.tag == 2){
+            this.game.onPlantKilled(this.node);
+        }
     },
 
     start () {

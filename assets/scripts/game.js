@@ -6,7 +6,7 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 //设立一个基准难度系数 随时间增长 障碍物的速度、动画播放速度、分数增长均受基准难度系数控制 有阈值
-//碰撞动画、downRun时发生碰撞，s仍可用、plantB碰撞后会消失、碰撞飞鸟后模型落地、游戏结束界面
+//碰撞动画、downRun时发生碰撞s仍可用、空中碰撞后模型落地、游戏结束界面、陨石爆炸动画、陨石无法摧毁植物、飞鸟碰撞后会消失
 cc.Class({
     extends: cc.Component,
 
@@ -118,18 +118,22 @@ cc.Class({
     onKeyDown(event){
         switch(event.keyCode){
             case cc.macro.KEY.s:
-                if(this.dinosaur.y < -166){
+                if(this.dinosaur.y == -167){
                     this.dinosaur.active = false;
                     this.downRun.active = true;
                 }
+                break;
         }
     },
 
     onKeyUp(event){
         switch(event.keyCode){
             case cc.macro.KEY.s:
-                this.dinosaur.active = true;
-                this.downRun.active = false;
+                if(this.dinosaur.y == -167){
+                    this.dinosaur.active = true;
+                    this.downRun.active = false;
+                }
+                break;
         }
     },
 
@@ -140,12 +144,9 @@ cc.Class({
         } else{
             var newStone = cc.instantiate(this.stonePrefab);
         }
-        //添加到子节点
         this.node.addChild(newStone);
-        //赋值陨石一个随机初始位置
         newStone.setPosition(this.newStonePosition());
         newStone.getComponent('stone').game = this;
-        //重置计时器，陨石生成时间
         this.stoneTime = 0;
         this.stoneDuration = this.stoneMinDuration + Math.random()*(this.stoneMaxDuration - this.stoneMinDuration);
     },
@@ -211,7 +212,7 @@ cc.Class({
     },
     //bird销毁
     onBirdKilled: function(newBird){
-        this.birdPool.get(newBird);
+        this.birdPool.put(newBird);
     },
 
     start () {
@@ -229,14 +230,14 @@ cc.Class({
         if(this.plantTime > this.plantDuration){
             this.spawnNewPlant();
         }
-        //生成plantB
+        //生成 plantB
         this.plantBTime += dt;
         if(this.plantBTime > this.plantBDuration){
             this.spawnNewPlantB();
         }
         //生成飞鸟,200分开始
         this.birdTime += dt;
-        if(this.birdTime > this.birdDuration && this.score > 100){
+        if(this.birdTime > this.birdDuration && this.score > 50){
             this.spawnNewBird();
         }
         this.score += 10*dt;

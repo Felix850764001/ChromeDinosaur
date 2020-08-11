@@ -5,7 +5,6 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
-window.py = 0;
 cc.Class({
     extends: cc.Component,
 
@@ -41,23 +40,16 @@ cc.Class({
         this.dead.opacity = 255;
         //暂停游戏
         cc.director.pause();
-        //初始化键盘输入监听    (type, callback, target)
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
-    },
-
-    //取消键盘输入监听
-    onDestroy(){
-        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
-        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
     },
 
     onKeyDown(event){
         switch(event.keyCode){
             case cc.macro.KEY.w:
-                if(this.node.y <= -166){       //限制无限跳
+                if(this.node.y == -167){       //限制无限跳
+                    console.log(this.node.y);
                     this.jumpAction = this.setJumpAction();  //赋值setJumpAction方法
                     this.node.runAction(this.jumpAction);
+                    console.log(this.node.y);
                 }
                 break;
             case cc.macro.KEY.s:
@@ -66,6 +58,7 @@ cc.Class({
                     var moveDown = cc.moveTo(0.1, this.node.x,-167);
                     this.node.runAction(moveDown);
                 }
+                break;
         }
     },
 
@@ -75,6 +68,7 @@ cc.Class({
     },
 
     update: function(dt){
-        py = this.node.y;
+        this.dead.x = this.node.x;
+        this.dead.y = this.node.y;
     },
 });
